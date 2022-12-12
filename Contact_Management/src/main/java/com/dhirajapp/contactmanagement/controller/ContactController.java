@@ -9,46 +9,47 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.dhirajapp.contactmanagement.service.ContactServiceImpe;
+import com.dhirajapp.contactmanagement.service.ContactService;
 import com.dhirajapp.contactmanagement.model.Contact;
 
-
+@RestController
 public class ContactController {
 
 	@Autowired
-	ContactServiceImpe contactServiceimpe;  
+	private ContactService contactService;  
 	 
-	@GetMapping("/contact")  
+	@GetMapping("/contacts")  
 	private List<Contact> getAllContact()   
 	{  
-	    return contactServiceimpe.getAllContact();  
+	    return contactService.getAllContact();  
 	}  
 	
 	@GetMapping("/contact/{contactid}")  
 	private Contact getBooks(@PathVariable("contactid") int contactid)   
 	{  
-	return contactServiceimpe.getContactById(contactid);  
+	return contactService.getContactById(contactid);  
 	}  
 	
 	@DeleteMapping("/contact/{contactid}")  
 	private void deleteContactById(@PathVariable("contactid") int contactid)   
 	{  
-		contactServiceimpe.deleteContactById(contactid);  
+		contactService.deleteContactById(contactid);  
 	}  
 	 
-	@PostMapping("/contacts")  
+	@PostMapping("/contact")  
 	private String saveContact(@RequestBody Contact contacts)   
 	{  
-		contactServiceimpe.saveContact(contacts);  
-	return contacts.getContactName();  
+		String status=contactService.saveContact(contacts);  
+	return status;  
 	}  
 
 	@PutMapping("/contacts")  
-	private Contact update(@RequestBody Contact contacts)   
+	private String update(@RequestBody Contact contacts)   
 	{  
-	contactServiceimpe.saveContact(contacts);  
-	return contacts;  
+	 return contactService.updateContact(contacts);  
+  
 	}  
 }
 
