@@ -16,40 +16,34 @@ import com.dhirajapp.contactmanagement.model.Contact;
 
 @RestController
 public class ContactController {
+    @Autowired
+	private ContactService contactService;
 
-	@Autowired
-	private ContactService contactService;  
-	 
-	@GetMapping("/contacts")  
-	private List<Contact> getAllContact()   
-	{  
-	    return contactService.getAllContact();  
-	}  
-	
-	@GetMapping("/contact/{contactid}")  
-	private Contact getBooks(@PathVariable("contactid") int contactid)   
-	{  
-	return contactService.getContactById(contactid);  
-	}  
-	
-	@DeleteMapping("/contact/{contactid}")  
-	private void deleteContactById(@PathVariable("contactid") int contactid)   
-	{  
-		contactService.deleteContactById(contactid);  
-	}  
-	 
-	@PostMapping("/contact")  
-	private String saveContact(@RequestBody Contact contacts)   
-	{  
-		String status=contactService.saveContact(contacts);  
-	return status;  
-	}  
+	@GetMapping("/contacts")
+	public List<Contact> getAllContact() {
+		return contactService.getAllContact();
+	}
 
-	@PutMapping("/contacts")  
-	private String update(@RequestBody Contact contacts)   
-	{  
-	 return contactService.updateContact(contacts);  
-  
-	}  
+	@GetMapping("/contact/{contactid}")
+	public Contact getBooks(@PathVariable("contactid") int contactid) {
+		return contactService.getContactById(contactid);
+	}
+
+	@DeleteMapping("/contact/{contactid}")
+	public void deleteContactById(@PathVariable("contactid") int contactid) {
+		contactService.deleteContactById(contactid);
+	}
+
+	@PostMapping("/contact")
+	public String saveContact(@RequestBody Contact contacts) {
+		String status = contactService.saveContact(contacts);
+		return status;
+	}
+
+	@PutMapping("/contacts")
+	public String update(@RequestBody Contact contacts) {
+		return contactService.updateContact(contacts);
+
+	}
+
 }
-

@@ -1,15 +1,14 @@
 package com.dhirajapp.contactmanagement.service;
 
-
-
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.dhirajapp.contactmanagement.model.Contact;
 import com.dhirajapp.contactmanagement.repository.ContactRepository;
-
+@Component
 public class ContactServiceImpe implements ContactService {
     @Autowired
 	private ContactRepository repo;
